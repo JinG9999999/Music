@@ -1,0 +1,88 @@
+﻿@model Music.HC.Models.MusicModel
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>添加唱片信息</h2>
+
+@using (Html.BeginForm("Add", "music", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+
+    <table class="table table-bordered">
+        <tr>
+            <td>@Html.LabelFor(s => s.CorpName)</td>
+            <td>@Html.TextBoxFor(s => s.CorpName)</td>
+            <td>@Html.ValidationMessageFor(s => s.CorpName, null, new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(s => s.Cover)</td>
+            <td>
+                @Html.TextBoxFor(s => s.Cover, new { @type = "file" })
+                @Html.HiddenFor(s => s.Mid);
+            </td>
+            <td>@Html.ValidationMessageFor(s => s.Cover, null, new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(s => s.Tags)</td>
+            <td>
+                <input id="Checkbox1" type="checkbox" name="Tags" value="古典" checked="checked" /> 古典
+                <input id="Checkbox2" type="checkbox" name="Tags" value="现代" /> 现代
+                <input id="Checkbox3" type="checkbox" name="Tags" value="流行" /> 流行
+                <input id="Checkbox4" type="checkbox" name="Tags" value="爵士" /> 爵士
+                <input id="Checkbox5" type="checkbox" name="Tags" value="电音" /> 电音
+                <input id="Checkbox6" type="checkbox" name="Tags" value="韩语" /> 韩语<br />
+                <input id="Checkbox7" type="checkbox" name="Tags" value="日语" /> 日语
+                <input id="Checkbox8" type="checkbox" name="Tags" value="法语" /> 法语
+                <input id="Checkbox9" type="checkbox" name="Tags" value="男声" /> 男声
+                <input id="Checkbox10" type="checkbox" name="Tags" value="组合" /> 组合
+                <input id="Checkbox11" type="checkbox" name="Tags" value="女生" /> 女生
+                <input id="Checkbox12" type="checkbox" name="Tags" value="纯音" /> 纯音
+            </td>
+            <td>@Html.ValidationMessageFor(s => s.Tags, null, new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(s => s.Maker)</td>
+            <td>@Html.TextBoxFor(s => s.Maker)</td>
+            <td>@Html.ValidationMessageFor(s => s.Maker, null, new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(s => s.Singer)</td>
+            <td>@Html.TextBoxFor(s => s.Singer)</td>
+            <td>@Html.ValidationMessageFor(s => s.Singer, null, new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(s => s.CorpModels.CorpName)</td>
+            <td>@Html.DropDownListFor(s => s.CorpModelCid, ViewBag.bandsel as SelectList, "--请选择--")</td>
+            <td>@Html.ValidationMessageFor(s => s.CorpModelCid, null, new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(s => s.ReleaseDate)</td>
+            <td>@Html.TextBoxFor(s => s.ReleaseDate, new { @onclick = "WdatePicker()" })</td>
+            <td>@Html.ValidationMessageFor(s => s.ReleaseDate, null, new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(s => s.Price)</td>
+            <td>@Html.TextBoxFor(s => s.Price)</td>
+            <td>@Html.ValidationMessageFor(s => s.Price, null, new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(s => s.Adder)</td>
+            <td>@Session["name"]</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(s => s.CdDetail)</td>
+            <td>@Html.TextAreaFor(s => s.CdDetail)</td>
+            <td>@Html.ValidationMessageFor(s => s.CdDetail, null, new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input id="Submit1" type="submit" value="添加" class="btn btn-primary" /></td>
+            <td></td>
+        </tr>
+    </table>
+}
+
+@section scripts{
+    <script src="~/Content/My97DatePicker/WdatePicker.js"></script>
+}

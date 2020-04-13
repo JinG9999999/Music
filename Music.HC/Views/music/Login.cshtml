@@ -1,0 +1,27 @@
+﻿@model Music.HC.Models.UserModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+    <table class="table table-bordered">
+        <tr>
+            <td>@Html.LabelFor(s => s.UserName)</td>
+            <td>@Html.TextBoxFor(s => s.UserName)</td>
+            <td>@Html.ValidationMessageFor(s => s.UserName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(s => s.Password)</td>
+            <td>@Html.TextBoxFor(s => s.Password)</td>
+            <td>@Html.ValidationMessageFor(s => s.Password)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input id="Submit1" type="submit" value="登录" class="btn btn-primary" /></td>
+            <td></td>
+        </tr>
+    </table>
+}

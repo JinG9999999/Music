@@ -1,0 +1,87 @@
+﻿@model Music.HC.Models.PagedInfo
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>唱片管理</h2>
+
+@using (Html.BeginForm("Show", "music", FormMethod.Post, new { id = "fromSearch" }))
+{
+    @Html.HiddenFor(s => s.currentPage)
+    <table>
+        <tr>
+            <td>音乐名称：</td>
+            <td>@Html.TextBox("Name")</td>
+            <td>唱片公司:</td>
+            <td>@Html.DropDownList("Cid", ViewBag.bandsel as SelectList, "---请选择---")</td>
+            <td><input id="Submit1" type="submit" value="搜索" class="btn btn-primary" onclick="show()" /></td>
+        </tr>
+    </table>
+}
+<a href="/music/Add">添加唱片公司</a>
+<a href="#">添加新唱片</a>
+
+<table class="table table-bordered">
+    <thead style="background-color:gray">
+        <tr>
+            <th>编号</th>
+            <th>音乐名称</th>
+            <th>唱片封面</th>
+            <th>唱片标签</th>
+            <th>制作人</th>
+            <th>演唱</th>
+            <th>音乐公司</th>
+            <th>公司地址</th>
+            <th>发布日期</th>
+            <th>价格</th>
+            <th>添加人</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model.musics)
+
+        {
+            <tr>
+                <td>@i.Mid</td>
+                <td>@i.CorpName</td>
+                <td><img src="@i.Cover" alt="" style="width:200px;height:100px;" /></td>
+                <td>@i.Tags</td>
+                <td>@i.Maker</td>
+                <td>@i.Singer</td>
+                <td>@i.CorpModels.CorpName</td>
+                <td>@i.CorpModels.Location</td>
+                <td>@i.ReleaseDate</td>
+                <td>@i.Price</td>
+                <td>@i.Adder</td>
+                <td>
+                    @Html.ActionLink("编辑", "Upt", new { id = i.Mid })丨
+                    @Html.ActionLink("详情", "XQ", new { id = i.Mid })丨
+                    @Html.ActionLink("删除", "Del", new { id = i.Mid })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table table-bordered">
+    <tr>
+        <td> 总共 <span>@Model.TotalConut</span> 条记录</td>
+        <td> 总共 <span>@Model.TotalPage</span> 页</td>
+        <td> 当前 <span>@Model.currentPage</span> 页</td>
+        <td> <a href="javascript:;" onclick="show(1)">首页</a></td>
+        <td> <a href="javascript:;" onclick="show(@Model.currentPage-1);">上一页</a> </td>
+        <td> <a href="javascript:;" onclick="show(@Model.currentPage+1);">下一页</a> </td>
+        <td> <a href="javascript:;" onclick="show(@Model.TotalPage)">尾页</a> </td>
+        <td width="50%"> </td>
+    </tr>
+</table>
+
+@section scripts{
+    <script>
+        function show(page) {
+            $("#currentPage").val(page);
+            $("#fromSearch").submit();
+        }
+    </script>
+}

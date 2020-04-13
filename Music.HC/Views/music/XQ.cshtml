@@ -1,0 +1,52 @@
+﻿@model Music.HC.Models.MusicModel
+@{
+    ViewBag.Title = "XQ";
+}
+
+<h2>唱片--@(Model.CorpName)</h2>
+
+@using (Html.BeginForm())
+{
+    <table class="table table-bordered">
+        <tr>
+            <td>音乐名称</td>
+            <td>@(Model.CorpName)</td>
+        </tr>
+        <tr>
+            <td>唱片封面</td>
+            <td><img src="@(Model.Cover)" alt="" style="width:200px;height:100px;" /></td>
+        </tr>
+        <tr>
+            <td>唱片标签</td>
+            <td>@(Model.Tags)</td>
+        </tr>
+        <tr>
+            <td>制作人</td>
+            <td>@(Model.Maker)</td>
+        </tr>
+        <tr>
+            <td>演唱</td>
+            <td>@(Model.Singer)</td>
+        </tr>
+        <tr>
+            <td>音乐公司</td>
+            <td>@(Model.CorpModels.CorpName)</td>
+        </tr>
+        <tr>
+            <td>发布日期</td>
+            <td>@(Model.ReleaseDate)</td>
+        </tr>
+        <tr>
+            <td>价格</td>
+            <td>@(Model.Price)</td>
+        </tr>
+        <tr>
+            <td>添加人</td>
+            <td>@(Model.Adder)</td>
+        </tr>
+        <tr>
+            <td>唱片详情</td>
+            <td>@(Model.CdDetail)</td>
+        </tr>
+    </table>
+}
